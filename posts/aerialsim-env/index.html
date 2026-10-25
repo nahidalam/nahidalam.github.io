@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Introducing AerialSim-Env: Training and Evaluating AI Agents for Drone Control</title>
+<title>Introducing AerialSim: Training and Evaluating AI Agents for Drone Control</title>
 <meta name="description" content="Train and evaluate vision-language agents on realistic drone missions through interactive control, code generation, and verifiable rewards.">
 <link rel="stylesheet" href="../../style.css">
 </head>
@@ -13,27 +13,27 @@
 <p class="back"><a href="/">Nahid's Notes</a></p>
 
 <header>
-  <h1>Introducing AerialSim-Env: Training and Evaluating AI Agents for Drone Control</h1>
+  <h1>Introducing AerialSim: Training and Evaluating AI Agents for Drone Control</h1>
   <p class="standfirst">Train and evaluate vision-language agents on realistic drone missions through interactive control, code generation, and verifiable rewards.</p>
   <p class="meta">October 2026</p>
 </header>
 
 <div class="video">
-  <iframe src="https://www.youtube-nocookie.com/embed/I6MW7YdCCJI" title="AerialSim-Env demo" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe src="https://www.youtube-nocookie.com/embed/I6MW7YdCCJI" title="AerialSim demo" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-<p>Vision-language models have become increasingly capable of understanding images and videos. AerialSim-Env extends these capabilities to autonomous drone missions that require visual perception, spatial reasoning, planning, and physical action.</p>
+<p>Vision-language models have become increasingly capable of understanding images and videos. AerialSim extends these capabilities to autonomous drone missions that require visual perception, spatial reasoning, planning, and physical action.</p>
 
 <p>Consider a drone approaching a landing pad. The model must identify the pad, navigate toward it, detect obstacles, and decide whether landing is safe. If the pad becomes obstructed during the approach, the model needs to adjust its plan. These tasks bring together visual understanding, sequential decision-making, and feedback from the physical environment.</p>
 
-<p>Today, we're introducing AerialSim-Env, developed with <a href="http://www.primeintellect.ai/">Prime Intellect</a>, for training and evaluating vision-language agents on autonomous drone missions. Built on Cosys-AirSim and Unreal Engine 5.5, it supports two control modes: interactive flight through visual observations and actions, and programmatic flight through generated Python code. Both modes use reproducible scenarios and verifiable rewards based on flight outcomes.</p>
+<p>Today, we're introducing AerialSim, developed with <a href="http://www.primeintellect.ai/">Prime Intellect</a>, for training and evaluating vision-language agents on autonomous drone missions. Built on Cosys-AirSim and Unreal Engine 5.5, it supports two control modes: interactive flight through visual observations and actions, and programmatic flight through generated Python code. Both modes use reproducible scenarios and verifiable rewards based on flight outcomes.</p>
 
 <h2>One simulator, two ways to control a drone</h2>
 
-<p>AerialSim-Env is built on Cosys-AirSim and Unreal Engine 5.5. It simulates drone missions in a photorealistic urban park with landing pads, obstacles, and varying environmental conditions. The environment supports two control modes that share the same simulator, scenario families, and trajectory-based evaluation.</p>
+<p>AerialSim is built on Cosys-AirSim and Unreal Engine 5.5. It simulates drone missions in a photorealistic urban park with landing pads, obstacles, and varying environmental conditions. The environment supports two control modes that share the same simulator, scenario families, and trajectory-based evaluation.</p>
 
 <figure>
-  <img src="two-modes.png" alt="Diagram comparing interactive control and code generation in AerialSim-Env" width="1600" height="555">
+  <img src="two-modes.png" alt="Diagram comparing interactive control and code generation in AerialSim" width="1600" height="555">
   <figcaption>Figure 1: One simulator, two ways to control.</figcaption>
 </figure>
 
@@ -52,7 +52,7 @@
 
 <h2>Seven scenario families for autonomous flight</h2>
 
-<p>AerialSim-Env includes seven scenario families designed to evaluate different aspects of autonomous flight, including navigation, landing decisions, obstacle avoidance, and multi-step mission execution.</p>
+<p>AerialSim includes seven scenario families designed to evaluate different aspects of autonomous flight, including navigation, landing decisions, obstacle avoidance, and multi-step mission execution.</p>
 
 <div class="tablewrap">
 <table>
@@ -77,7 +77,7 @@
 
 <h2>Example scenario</h2>
 
-<p>AerialSim-Env uses predefined seeds to generate reproducible missions. Each seed defines a base scenario, including the drone's starting position, landing-pad locations, and flight constraints. The environment then creates scenario variants by changing specific conditions, such as obstacle placement. Training and evaluation use separate seed ranges to prevent overlap.</p>
+<p>AerialSim uses predefined seeds to generate reproducible missions. Each seed defines a base scenario, including the drone's starting position, landing-pad locations, and flight constraints. The environment then creates scenario variants by changing specific conditions, such as obstacle placement. Training and evaluation use separate seed ranges to prevent overlap.</p>
 
 <p>For example, in <code>land_or_hold</code>, seed 50 generates two variants of the same base scenario: one with a clear landing pad and another with an obstruction. Both share the same mission instructions, drone starting position, and landing-pad location. The agent flies each variant independently using camera observations, without being told which condition is present. Comparing the outcomes helps determine whether the model adjusts its decisions appropriately when the environment changes. Other families, such as <code>alternate_pad</code>, generate three variants per seed to test different landing conditions.</p>
 
@@ -164,7 +164,7 @@ d.land()</code></pre>
 
 <h2>Reward design: verifying flight outcomes</h2>
 
-<p>AerialSim-Env is designed with binary success failure rewards (1/0). The environment evaluates each flight using recorded simulator data. The recorder captures the drone's position, velocity, orientation, and collision state at approximately 10 Hz. A mission succeeds when all applicable conditions are satisfied.</p>
+<p>AerialSim is designed with binary success failure rewards (1/0). The environment evaluates each flight using recorded simulator data. The recorder captures the drone's position, velocity, orientation, and collision state at approximately 10 Hz. A mission succeeds when all applicable conditions are satisfied.</p>
 
 <p>The evaluator checks four categories of conditions:</p>
 
@@ -189,7 +189,7 @@ d.land()</code></pre>
 
 <h2>Training strategies: reinforcement learning with GRPO</h2>
 
-<p>AerialSim-Env integrates with Prime Intellect's prime-rl framework and supports Group Relative Policy Optimization (GRPO). Each flight rollout receives a binary reward of 1 if the mission succeeds while satisfying all required safety and scenario constraints, or 0 otherwise. GRPO uses relative rewards within groups of rollouts to update the policy.</p>
+<p>AerialSim integrates with Prime Intellect's prime-rl framework and supports Group Relative Policy Optimization (GRPO). Each flight rollout receives a binary reward of 1 if the mission succeeds while satisfying all required safety and scenario constraints, or 0 otherwise. GRPO uses relative rewards within groups of rollouts to update the policy.</p>
 
 <p>The model reported in our results was trained with a sampling temperature of 1.0, a group size of 16, a batch size of 64, and a maximum sequence length of 16,384 tokens. The four longest scenario families use a frame budget of 12 to stay within the inference server's limit of 16 images per request. The three shorter families do not require frame selection. Training and evaluation use separate seed ranges.</p>
 
@@ -295,7 +295,7 @@ bash scripts/aerialsim_flight/build_image.sh</code></pre>
 
 <h2>What's next</h2>
 
-<p>Our initial results show that RL training improves mission execution and reduces turn-limit failures. However, the <code>land_or_hold</code> results reveal a challenge in visual understanding and decision-making. The next phase of AerialSim-Env development is guided by these findings:</p>
+<p>Our initial results show that RL training improves mission execution and reduces turn-limit failures. However, the <code>land_or_hold</code> results reveal a challenge in visual understanding and decision-making. The next phase of AerialSim development is guided by these findings:</p>
 
 <h3>1. Understanding visual decision-making</h3>
 
