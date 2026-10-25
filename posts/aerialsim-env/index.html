@@ -26,7 +26,7 @@
 
 <p>Consider a drone approaching a landing pad. The model must identify the pad, navigate toward it, detect obstacles, and decide whether landing is safe. If the pad becomes obstructed during the approach, the model needs to adjust its plan. These tasks bring together visual understanding, sequential decision-making, and feedback from the physical environment.</p>
 
-<p>Today, we're introducing AerialSim, developed with <a href="http://www.primeintellect.ai/">Prime Intellect</a>, for training and evaluating vision-language agents on autonomous drone missions. Built on Cosys-AirSim and Unreal Engine 5.5, it supports two control modes: interactive flight through visual observations and actions, and programmatic flight through generated Python code. Both modes use reproducible scenarios and verifiable rewards based on flight outcomes.</p>
+<p>Today, we're introducing AerialSim, developed with <a href="http://www.primeintellect.ai/">Prime Intellect</a>, for training and evaluating vision-language agents on autonomous drone missions. Built on Cosys-AirSim and Unreal Engine 5.5, AerialSim supports two approaches to autonomous flight. In Visual mode, the agent observes the environment through drone cameras and controls the drone one action at a time, using feedback to adjust its decisions. In Coding mode, the agent writes a Python program to control the drone, tests and revises the program, and submits it for autonomous execution. Both modes share the same simulation environment, reproducible scenarios, and verifiable rewards based on flight outcomes.</p>
 
 <h2>One simulator, two ways to control a drone</h2>
 
