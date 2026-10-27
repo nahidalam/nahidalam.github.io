@@ -145,6 +145,8 @@ a:focus-visible {
   border-top: 1px solid var(--faint);
 }
 
+.post footer .back { margin: 1.25rem 0 0; }
+
 .post h1 {
   font-size: 2rem;
   line-height: 1.2;
