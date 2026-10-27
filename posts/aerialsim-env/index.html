@@ -189,7 +189,7 @@ d.land()</code></pre>
 
 <h2>Training Strategies: Reinforcement Learning with GRPO</h2>
 
-<p>AerialSim integrates with Prime Intellect's prime-rl framework and supports Group Relative Policy Optimization (GRPO). Each flight rollout receives a binary reward of 1 if the mission succeeds while satisfying all required safety and scenario constraints, or 0 otherwise. GRPO uses relative rewards within groups of rollouts to update the policy.</p>
+<p>AerialSim integrates with Prime Intellect's <a href="https://github.com/PrimeIntellect-ai/prime-rl">prime-rl</a> framework and supports Group Relative Policy Optimization (GRPO). Each flight rollout receives a binary reward of 1 if the mission succeeds while satisfying all required safety and scenario constraints, or 0 otherwise. GRPO uses relative rewards within groups of rollouts to update the policy.</p>
 
 <p>The model reported in our results was trained with a sampling temperature of 1.0, a group size of 16, a batch size of 64, and a maximum sequence length of 16,384 tokens. The four longest scenario families use a frame budget of 12 to stay within the inference server's limit of 16 images per request. The three shorter families do not require frame selection. Training and evaluation use separate seed ranges.</p>
 
